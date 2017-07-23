@@ -1,9 +1,9 @@
 <?php
 
 /**
- * @copyright Copyright &copy; Kartik Visweswaran, Krajee.com, 2014 - 2017
+ * @copyright Copyright &copy; Kartik Visweswaran, Krajee.com, 2014 - 2016
  * @package yii2-grid
- * @version 3.1.5
+ * @version 3.1.4
  */
 
 namespace kartik\grid;
@@ -279,9 +279,9 @@ class ActionColumn extends YiiActionColumn
                     ]
                 );
                 ActionColumnAsset::register($view);
-                $js = "kvActionDelete({$delOpts});";
-                $view->registerJs($js);
-                $this->initPjax($js);
+//                $js = "kvActionDelete({$delOpts});";
+//                $view->registerJs($js);
+//                $this->initPjax($js);
                 if ($this->_isDropdown) {
                     $options['tabindex'] = '-1';
                     return '<li>' . Html::a($label, $url, $options) . '</li>' . PHP_EOL;
@@ -299,8 +299,7 @@ class ActionColumn extends YiiActionColumn
     {
         $content = parent::renderDataCellContent($model, $key, $index);
         $options = $this->dropdownButton;
-        $trimmed = trim($content);
-        if ($this->_isDropdown  && !empty($trimmed)) {
+        if ($this->_isDropdown) {
             $label = ArrayHelper::remove($options, 'label', Yii::t('kvgrid', 'Actions'));
             $caret = ArrayHelper::remove($options, 'caret', ' <span class="caret"></span>');
             $options = array_replace_recursive($options, ['type' => 'button', 'data-toggle' => 'dropdown']);
